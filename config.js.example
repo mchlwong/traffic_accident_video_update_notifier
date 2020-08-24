@@ -1,0 +1,7 @@
+const token = '888888888:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+const chatId = -8888888888888;
+
+module.exports = {
+  token,
+  chatId,
+};
