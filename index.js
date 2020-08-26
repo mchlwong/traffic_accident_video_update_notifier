@@ -21,12 +21,13 @@ async function main() {
 
 async function getVideos() {
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+  let videos = [];
   try {
     const page = await browser.newPage();
     await page.goto('https://www.acfun.cn/u/4075269', {
       waitUntil: 'domcontentloaded',
     });
-    const videos = await page.evaluate(() => {
+    videos = await page.evaluate(() => {
       const cards = document.querySelectorAll('#ac-space-video-list > a');
       const videos = [];
       for (const card of cards) {
@@ -41,12 +42,12 @@ async function getVideos() {
       }
       return videos;
     });
-    await browser.close();
-    return videos;
   } catch (err) {
-    await browser.close();
-    return [];
+    console.log((new Date()).toLocaleString());
+    console.log(err.stack);
   }
+  await browser.close();
+  return videos;
 }
 
 async function sendTelegram(videos) {
