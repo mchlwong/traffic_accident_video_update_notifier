@@ -1,3 +1,5 @@
+process.env.TZ = 'Asia/Shanghai';
+
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const { token, chatId } = require('./config.js');
@@ -43,7 +45,7 @@ async function getVideos() {
       return videos;
     });
   } catch (err) {
-    console.log((new Date()).toLocaleString());
+    console.log(new Date());
     console.log(err.stack);
   }
   await browser.close();
