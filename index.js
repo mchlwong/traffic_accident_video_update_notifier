@@ -20,8 +20,8 @@ async function main() {
 }
 
 async function getVideos() {
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   try {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://www.acfun.cn/u/4075269', {
       waitUntil: 'domcontentloaded',
@@ -44,6 +44,7 @@ async function getVideos() {
     await browser.close();
     return videos;
   } catch (err) {
+    await browser.close();
     return [];
   }
 }
