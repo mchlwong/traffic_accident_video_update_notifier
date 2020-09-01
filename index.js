@@ -1,5 +1,6 @@
 process.env.TZ = 'Asia/Shanghai';
 
+const querystring = require('querystring');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const { token, chatId } = require('./config.js');
@@ -56,12 +57,14 @@ async function sendTelegram(videos) {
   for (const video of videos) {
     try {
       const response = await axios.post(
-        `https://api.telegram.org/bot${token}/sendMessage`,
-        {
-          chat_id: chatId,
-          text: video.description,
-          disable_web_page_preview: true,
-        }
+        `https://api.telegram.org/bot${token}/sendMessage?${querystring.stringify(
+          {
+            chat_id: chatId,
+            parse_mode: 'HTML',
+            text: `<a href='${video.link}'>${video.description}</a>`,
+            disable_web_page_preview: true,
+          }
+        )}`
       );
 
       console.log(new Date().toLocaleString());
