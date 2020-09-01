@@ -45,7 +45,7 @@ async function getVideos() {
       return videos;
     });
   } catch (err) {
-    console.log(new Date());
+    console.log(new Date().toLocaleString());
     console.log(err.stack);
   }
   await browser.close();
@@ -64,7 +64,7 @@ async function sendTelegram(videos) {
         }
       );
 
-      console.log(new Date());
+      console.log(new Date().toLocaleString());
       if (response.data && response.data.ok) {
         console.log('Message sent.');
       } else {
@@ -72,7 +72,7 @@ async function sendTelegram(videos) {
         console.log(response.data);
       }
     } catch (err) {
-      console.log(new Date());
+      console.log(new Date().toLocaleString());
       console.log('Failed to send message.');
     }
   }
