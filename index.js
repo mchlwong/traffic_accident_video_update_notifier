@@ -16,9 +16,10 @@ async function main() {
     if (videos.length > 0 && newVideos.length > 0) {
       await sendTelegram(newVideos);
     }
-    if (currentVideos.length > 0) {
-      videos = currentVideos;
-    }
+    // if (currentVideos.length > 0) {
+    //   videos = currentVideos;
+    // }
+    videos = [...videos, ...newVideos];
   }, 15 * 60 * 1000);
 }
 
